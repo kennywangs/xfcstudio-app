@@ -4,37 +4,14 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
+    info: '请同意我们获取您的头像昵称',
+    mobile: wx.getStorageSync('mobile'),
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  getlocal: function(){
-    wx.request({
-      url: 'http://localhost:8080/user/list',
-      data: {},
-      dataType:'json',
-      success: function (res){
-        console.log(res.data.data);
-      }
-    })
-  },
   onLoad: function () {
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.redirectTo({
-            url: '/pages/home/home'
-          })
-        }
-      }
-    });
+    app.getUserInfo(this.updateData);
+    
     // if (app.globalData.userInfo) {
     //   this.setData({
     //     userInfo: app.globalData.userInfo,
@@ -63,11 +40,25 @@ Page({
     //   })
     // }
   },
+  updateData: function() {
+    if (app.globalData.userInfo) {
+      this.setData({ info: '已得到您的授权，请输入手机号登录', hasUserInfo: true });
+    }
+    console.log(this.data);
+  },
+  setMobile: function(e) {
+    this.data.mobile = e.detail.value;
+  },
   getUserInfo: function(e) {
-    console.log(e);
+    console.log(e.detail);
     app.globalData.userInfo = e.detail.userInfo;
-    wx.redirectTo({
-      url: '/pages/home/home'
-    });
+    if (app.globalData.userInfo){
+      this.setData({ info: '已得到您的授权，请输入手机号登录', hasUserInfo: true });
+      console.log(this.data);
+    }
+  },
+  login: function() {
+    wx.setStorageSync('mobile', this.data.mobile);
+    app.getUserInfo(this.updateData);
   }
 })

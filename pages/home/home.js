@@ -12,15 +12,19 @@ Page({
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
-      })
-    }else{
-      app.userInfoReadyCallback = res => {
-        app.globalData.userInfo = res.userInfo;
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        });
-      }
+      });
     }
+    // else{
+    //   app.userInfoReadyCallback = res => {
+    //     app.globalData.userInfo = res.userInfo;
+    //     this.setData({
+    //       userInfo: res.userInfo,
+    //       hasUserInfo: true
+    //     });
+    //   }
+    // }
+  },
+  getlocal: function(){
+    console.log('getlocal');
   }
 });
