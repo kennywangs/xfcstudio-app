@@ -1,0 +1,91 @@
+<view class="page">
+  <view class="container" style="border-bottom: 2px solid #fff;">
+    <text>我的预约</text>
+  </view>
+  <view class="page__bd page__bd_spacing">
+    <view class="container">
+      <button class="row-margin-gap" type="primary" size='mini' bindtap="createAppoint">开始预约</button>
+      <picker mode="date" value="{{now}}" start="2019-01-01" end="2025-01-01" bindchange="bindDateChange">
+        <button class="row-margin-gap" type="primary" plain="true" size='mini'>查看预约</button>
+      </picker>
+    </view>
+    <view style="border-top: 2px solid #fff;" hidden="{{list_hide}}">
+      <!-- <text style="font-size: 13px;">预约日期：{{choose_date}}</text> -->
+      <view class="card-list" wx:for="{{appoints}}" wx:key="id">
+        <view class="card">
+          <view class="card-header">
+            <view>预约时间：</view>
+            <view style="font-size: 12px;">{{ item.startDate }} —— {{ item.endDate }}</view>
+          </view>
+          <view class="card-content">
+            <view>服务技师：{{ item.attendant.description }}</view>
+            <view>预约状态：{{ item.statusText }}</view>
+            <view>留言：{{ item.comment }}</view>
+          </view>
+          <view class="card-footer">
+            创建时间：{{ item.createDate }}
+          </view>
+        </view>
+      </view>
+      <view class="container" hidden="{{load_more_hide}}">
+        <button size="mini" type="primary" bindtap="loadMore">加载更多</button>
+      </view>
+    </view>
+    <view style="border-top: 2px solid #fff;" hidden="{{create_hide}}">
+      <view class="weui-cells form">
+        <picker bindchange="bindAttendantChange" range-key="description" range="{{attendants}}">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd cell">
+              <view class="weui-label">技师</view>
+            </view>
+            <view class="weui-cell__bd cell">
+              <text>{{attendant.description? attendant.description:"请点击选择"}}</text>
+            </view>
+          </view>
+        </picker>
+        <picker mode="date" value="{{now}}" start="2019-01-01" end="2025-01-01" bindchange="bindAppointDateChange">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd cell">
+              <view class="weui-label">预约日期</view>
+            </view>
+            <view class="weui-cell__bd cell">
+              <text>{{appointDate? appointDate:"请点击选择"}}</text>
+            </view>
+          </view>
+        </picker>
+        <picker mode="time" value="{{nowTime}}" start="00:00" end="24:59" bindchange="bindAppointTimeChange">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd cell">
+              <view class="weui-label">预约时间</view>
+            </view>
+            <view class="weui-cell__bd cell">
+              <text>{{appointTime? appointTime:"请点击选择"}}</text>
+            </view>
+          </view>
+        </picker>
+        <picker bindchange="bindDurationChange" value="appointDuration" range="{{durationArray}}">
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd cell">
+              <view class="weui-label">预约时长</view>
+            </view>
+            <view class="weui-cell__bd cell">
+              <text>{{appointDuration? appointDuration:"请点击选择"}}</text>
+            </view>
+          </view>
+        </picker>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd cell">
+            <view class="weui-label">留言备注</view>
+          </view>
+          <view class="weui-cell__bd cell">
+            <input class="weui-input" placeholder="请填写备注" type="text" bindinput="setComment" />
+          </view>
+        </view>
+      </view>
+      <view class="container">
+        <button size="mini" type="primary" bindtap="submit">提交预约</button>
+      </view>
+    </view>
+  </view>
+</view>
+

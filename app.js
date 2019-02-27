@@ -15,8 +15,8 @@ App({
   },
   login: function (res,token,callback) {
     var self = this;
-    callback('redirect home');
-    return;
+    // callback('redirect home');
+    // return;
     var mobile = wx.getStorageSync('mobile');
     if (!mobile){
       wx.showToast({
@@ -39,7 +39,7 @@ App({
       success: function (res) {
         console.log(res.data.data);
         if (res.data.success){
-          wx.setStorageSync('token', res.data.data.token);
+          wx.setStorageSync('access-token', res.data.data.token);
           if (callback){
             callback(res.data.data);
           }
@@ -78,7 +78,8 @@ App({
                   self.login(res, token, function (data) {
                     console.log(data.token);
                     wx.redirectTo({
-                      url: '/pages/home/home'
+                      // url: '/pages/home/home'
+                      url: '/pages/appoint/appoint'
                     })
                   });
                 }
@@ -88,5 +89,13 @@ App({
         }
       }
     });
-  }
+  },
+  getStatusText: function (status) {
+    if (status == 1)
+      return "等待确认";
+    if (status == 10)
+      return "预约已确认";
+    if (status == 99)
+      return "已取消";
+  },
 })
