@@ -78,8 +78,8 @@ App({
                   self.login(res, token, function (data) {
                     console.log(data.token);
                     wx.redirectTo({
-                      // url: '/pages/home/home'
-                      url: '/pages/appoint/appoint'
+                      url: '/pages/home/home'
+                      // url: '/pages/appoint/appoint'
                     })
                   });
                 }

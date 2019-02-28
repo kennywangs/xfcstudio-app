@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/home/home",
     "pages/logs/logs",
-    "pages/appoint/appoint"
+    "pages/appoint/appoint",
+    "pages/home/manage"
   ],
   "window": {
     "backgroundTextStyle": "light",
