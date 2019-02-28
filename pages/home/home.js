@@ -5,7 +5,8 @@ Page({
     grids: [
       { id: 1, image: '/images/icon_tabbar.png', label: '预约', url: '/pages/appoint/appoint'},
       { id: 2, image: '/images/icon_tabbar.png', label: '管理', url: '/pages/home/manage'},
-      {id: 3, image: '/images/icon_nav_form.png', label: '敬请期待', url: ''}
+      { id: 3, image: '/images/icon_tabbar.png', label: '地址', url: '/pages/home/addr' },
+      {id: 4, image: '/images/icon_nav_form.png', label: '敬请期待', url: ''}
     ],
     userInfo: {},
     hasUserInfo: false,

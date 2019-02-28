@@ -17,8 +17,6 @@ Page({
     appointTime: null,
     appointDuration: 1,
     comment: '',
-    // appoints: [{
-    //   startDate: "2019-02-27 17:00:00", endDate: "2019-02-27 18:00:00", attendant: { description: "余瑾" }, status: 1, createDate:"2019-02-27 16:01:20"}]
     appoints: [],
     no: 0,
     limit: 10,

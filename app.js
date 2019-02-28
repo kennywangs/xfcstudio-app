@@ -2,10 +2,13 @@
 App({
   onLaunch: function () {
     var self = this;
-    // 展示本地存储能力
-    // var logs = wx.getStorageSync('logs') || []
-    // logs.unshift(Date.now())
-    // wx.setStorageSync('logs', logs)
+    wx.getLocation({
+      type: 'gcj02',
+      success(res) {
+        self.globalData.latitude = res.latitude
+        self.globalData.longitude = res.longitude
+      }
+    })
   },
   globalData: {
     serverContext:'https://i.smellbang.com',
@@ -15,8 +18,8 @@ App({
   },
   login: function (res,token,callback) {
     var self = this;
-    // callback('redirect home');
-    // return;
+    callback('redirect home');
+    return;
     var mobile = wx.getStorageSync('mobile');
     if (!mobile){
       wx.showToast({
